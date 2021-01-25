@@ -4,10 +4,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Boiler plate</title>
+        <title>Breaking Bad</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>boilerplate</div>
+      <div>Breaking bad app</div>
     </>
   );
 }
