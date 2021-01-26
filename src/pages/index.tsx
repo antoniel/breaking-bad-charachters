@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Container, NavBar, SearchBar } from "src/components";
+import { CharacterInfo, Container, NavBar, SearchBar } from "src/components";
 
 export default function Home() {
   return (
@@ -11,6 +11,7 @@ export default function Home() {
       <NavBar />
       <Container>
         <SearchBar />
+        <CharacterInfo />
       </Container>
     </>
   );
