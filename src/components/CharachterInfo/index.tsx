@@ -1,23 +1,28 @@
-export const CharacterInfo = () => {
+import { Characters } from "src/types/Characters";
+
+interface CharacterInfoProps {
+  data: Characters;
+}
+export const CharacterInfo: React.FC<CharacterInfoProps> = ({ data }) => {
   return (
     <section className="relative w-full mx-auto max-w-screen-md grid grid-cols-2 gap-8">
       <article className="rounded-lg card-gradient">
         <img
           className="object-cover object-top w-full rounded-lg max-h-96"
-          src="https://images.amcnetworks.com/amc.com/wp-content/uploads/2015/04/cast_bb_700x1000_walter-white-lg.jpg"
+          src={data.img}
           alt="CharacterPicture"
         />
         <h2 className="py-2 text-2xl font-extrabold text-center text-gray-300">
-          Walter White
+          {data.name}
         </h2>
       </article>
       <article className="space-y-4">
-        <DataFieldText title="Nickname" content="Walter white" />
-        <DataFieldText title="Ocupation" content={["string", "string"]} />
-        <DataFieldText title="Status" content="Walter white" />
+        <DataFieldText title="Nickname" content={data.nickname} />
+        <DataFieldText title="Ocupation" content={data.occupation} />
+        <DataFieldText title="Status" content={data.status} />
         <DataFieldText
           title="Appear in seasons: "
-          content={["1", "2", "3", "4", "5"]}
+          content={data.appearance}
           type="season"
         />
       </article>
@@ -25,9 +30,10 @@ export const CharacterInfo = () => {
   );
 };
 
+type Content = (string | string[]) | number[];
 interface DataFieldTextProps {
   title: string;
-  content: string | string[];
+  content: Content;
   type?: "season";
 }
 
@@ -41,6 +47,7 @@ export const DataFieldText: React.FC<DataFieldTextProps> = ({
       <section className="text-gray-300">
         <h4 className="font-extrabold ">{title}</h4>
         <div className="space-y-2">
+          {/*@ts-ignore*/}
           {content.map((value, idx) => (
             <div
               key={idx}
@@ -58,10 +65,11 @@ export const DataFieldText: React.FC<DataFieldTextProps> = ({
       <section className="text-gray-300">
         <h4 className="font-extrabold ">{title}</h4>
         <div className="flex space-x-4">
+          {/*@ts-ignore*/}
           {content.map((value, idx) => (
             <div
               key={idx}
-              className="flex items-center w-16 h-16 align-middle rounded-lg card-gradient justify-center"
+              className="flex items-center justify-center w-16 h-16 align-middle rounded-lg card-gradient"
             >
               <p>{value}</p>
             </div>

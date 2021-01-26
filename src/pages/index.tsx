@@ -17,7 +17,7 @@ export default function Home() {
       <NavBar />
       <Container>
         <SearchBar setCharacters={setCharacters} />
-        {Boolean(characters.length) && <CharacterInfo />}
+        {Boolean(characters.length) && <CharacterInfo data={characters[0]} />}
       </Container>
     </>
   );

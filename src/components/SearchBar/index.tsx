@@ -25,6 +25,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ setCharacters }) => {
     e.preventDefault();
     const inputValue: string = e.target[0].value;
     const charachtersData = await fetchCharacters(inputValue);
+    const appearsInBetterCallSaul = charachtersData[0]?.category.includes(
+      "Better Call Saul"
+    );
+    if (appearsInBetterCallSaul) {
+      return setCharacters([]);
+    }
     setCharacters(charachtersData);
   };
 
