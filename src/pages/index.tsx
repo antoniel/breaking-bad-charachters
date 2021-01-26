@@ -1,7 +1,13 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import { CharacterInfo, Container, NavBar, SearchBar } from "src/components";
+import { Characters } from "src/types/Characters";
 
 export default function Home() {
+  const [characters, setCharacters] = useState<Characters[]>([]);
+  useEffect(() => {
+    console.log("state", characters);
+  }, []);
   return (
     <>
       <Head>
@@ -10,8 +16,8 @@ export default function Home() {
       </Head>
       <NavBar />
       <Container>
-        <SearchBar />
-        <CharacterInfo />
+        <SearchBar setCharacters={setCharacters} />
+        {Boolean(characters.length) && <CharacterInfo />}
       </Container>
     </>
   );
