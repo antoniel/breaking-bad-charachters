@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Container, NavBar } from "src/components";
+import { Container, NavBar, SearchBar } from "src/components";
 
 export default function Home() {
   return (
@@ -9,7 +9,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <Container>aaa</Container>
+      <Container>
+        <SearchBar />
+      </Container>
     </>
   );
 }
