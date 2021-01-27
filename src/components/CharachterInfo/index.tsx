@@ -5,7 +5,7 @@ interface CharacterInfoProps {
 }
 export const CharacterInfo: React.FC<CharacterInfoProps> = ({ data }) => {
   return (
-    <section className="relative w-full mx-auto max-w-screen-md grid grid-cols-2 gap-8">
+    <section className="relative w-full mx-auto max-w-screen-md grid grid-col-1 md:grid-cols-2 gap-8">
       <article className="rounded-lg card-gradient">
         <img
           className="object-cover object-top w-full rounded-lg max-h-96"
