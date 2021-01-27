@@ -1,5 +1,5 @@
 ## Projeto Online 
-Caso não queira baixar o projeto na sua máquina pode conferir no seguinte endereço: 
+Caso não queira baixar o projeto na sua máquina pode conferir no seguinte endereço: https://breaking-bad-characters-xi.vercel.app/
 ## Requisitos de Sistema
 
 git v2.13 or greater
