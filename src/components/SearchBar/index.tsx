@@ -49,7 +49,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     >
       <Input
         autoComplete="off"
-        className="w-full h-20 px-8 text-2xl rounded-lg outline-none card-gradient"
+        className="w-full text-gray-300 h-20 px-8 text-2xl rounded-lg outline-none card-gradient"
         name="search"
         placeholder="Pesquise por um personagem "
         title="search"
