@@ -4,34 +4,39 @@ import { Input } from "./style";
 
 interface SearchBarProps {
   setCharacters: Dispatch<SetStateAction<Characters[]>>;
+  setError: Dispatch<SetStateAction<Error | false>>;
 }
-export const SearchBar: React.FC<SearchBarProps> = ({ setCharacters }) => {
-  const fetchCharacters = async (
-    charactersName: string
-  ): Promise<Characters[]> => {
-    const response = await fetch(
-      `https://www.breakingbadapi.com/api/characters/?name=${charactersName}`,
-      {
-        method: "GET",
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Request charachters fail");
-    }
-    return response.json();
-  };
-
+export const SearchBar: React.FC<SearchBarProps> = ({
+  setCharacters,
+  setError,
+}) => {
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const inputValue: string = e.target[0].value;
     const charachtersData = await fetchCharacters(inputValue);
-    const appearsInBetterCallSaul = charachtersData[0]?.category.includes(
+    setCharacters(charachtersData);
+  };
+
+  const fetchCharacters = async (
+    charactersName: string
+  ): Promise<Characters[]> => {
+    const response = await fetch(
+      `https://www.breakingbadapi.com/api/characters/?name=${charactersName}`
+    );
+    const data = await response.json();
+
+    const appearsInBetterCallSaul = data[0]?.category.includes(
       "Better Call Saul"
     );
+
+    if (!response.ok) setError(new Error("Request charachters fail"));
+    if (!data.length) setError(new Error("Character not founded"));
     if (appearsInBetterCallSaul) {
-      return setCharacters([]);
+      setError(new Error("Character appears also in Better Call Saul Serie"));
+      return [];
     }
-    setCharacters(charachtersData);
+
+    return data;
   };
 
   return (
