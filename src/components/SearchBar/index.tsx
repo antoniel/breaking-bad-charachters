@@ -4,10 +4,12 @@ import { Input } from "./style";
 
 interface SearchBarProps {
   setCharacters: Dispatch<SetStateAction<Characters[]>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
   setError: Dispatch<SetStateAction<Error | false>>;
 }
 export const SearchBar: React.FC<SearchBarProps> = ({
   setCharacters,
+  setLoading,
   setError,
 }) => {
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
@@ -20,6 +22,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const fetchCharacters = async (
     charactersName: string
   ): Promise<Characters[]> => {
+    setLoading(true);
     const response = await fetch(
       `https://www.breakingbadapi.com/api/characters/?name=${charactersName}`
     );

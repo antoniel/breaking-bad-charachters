@@ -6,9 +6,12 @@ import { Characters } from "src/types/Characters";
 export default function Home() {
   const [characters, setCharacters] = useState<Characters[]>([]);
   const [error, setError] = useState<Error | false>(false);
+  const [isLoading, setLoading] = useState(false);
+
   useEffect(() => {
-    console.log("state", characters);
-  }, []);
+    setLoading(false);
+  }, [error, characters]);
+
   return (
     <>
       <Head>
@@ -17,10 +20,13 @@ export default function Home() {
       </Head>
       <NavBar />
       <Container>
-        <SearchBar setCharacters={setCharacters} setError={setError} />
-        {error && !characters.length ? (
-          <ErrorCard error={error.message} />
-        ) : null}
+        <SearchBar
+          setCharacters={setCharacters}
+          setError={setError}
+          setLoading={setLoading}
+        />
+        {isLoading && <LoadingPlaceholder />}
+        {error && !characters.length && <ErrorCard error={error.message} />}
         {Boolean(characters.length) && <CharacterInfo data={characters[0]} />}
       </Container>
     </>
@@ -31,6 +37,16 @@ const ErrorCard = ({ error = "" }) => {
   return (
     <div className="max-w-screen-md card-gradient w-8/12 py-4 rounded-lg">
       <p className="text-xl font-extrabold text-center text-red-900">{error}</p>
+    </div>
+  );
+};
+
+const LoadingPlaceholder = () => {
+  return (
+    <div className="w-full h-16 rounded-lg card-gradient animate-pulse max-w-screen-md">
+      <span className="flex items-center justify-center h-16 text-xl font-extrabold text-center text-gray-300 align-center">
+        Loading...
+      </span>
     </div>
   );
 };
